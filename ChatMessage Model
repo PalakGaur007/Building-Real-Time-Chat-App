@@ -1,0 +1,16 @@
+//Create a model for chat messages
+package com.chatapp.model;  
+  
+import org.springframework.data.annotation.Id;  
+import org.springframework.data.mongodb.core.mapping.Document;  
+  
+@Document(collection = "messages")  
+public class ChatMessage {  
+    @Id  
+    private String id;  
+    private String sender;  
+    private String content;  
+    private long timestamp;  
+  
+    // Getters and Setters  
+}  
