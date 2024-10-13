@@ -20,4 +20,23 @@ public class ChatService {
     public Flux<ChatMessage> getChatHistory() {  
         return chatMessageRepository.findAll();  
     }  
+// Retrieve messages by sender  
+    public Flux<ChatMessage> getMessagesBySender(String sender) {  
+        return chatMessageRepository.findBySender(sender);  
+    }  
+  
+    // Delete a message by its ID  
+    public Mono<Void> deleteMessageById(String id) {  
+        return chatMessageRepository.deleteById(id);  
+    }  
+  
+    // Update the content of a specific message  
+    public Mono<ChatMessage> updateMessageContent(String id, String newContent) {  
+        return chatMessageRepository.findById(id)  
+                .flatMap(existingMessage -> {  
+                    existingMessage.setContent(newContent);  
+                    return chatMessageRepository.save(existingMessage);  
+                });  
+    }  
+
 }  
