@@ -1,0 +1,23 @@
+package com.chatapp.service;  
+  
+import com.chatapp.model.ChatMessage;  
+import com.chatapp.repository.ChatMessageRepository;  
+import org.springframework.beans.factory.annotation.Autowired;  
+import org.springframework.stereotype.Service;  
+import reactor.core.publisher.Flux;  
+import reactor.core.publisher.Mono;  
+  
+@Service  
+public class ChatService {  
+  
+    @Autowired  
+    private ChatMessageRepository chatMessageRepository;  
+  
+    public Mono<ChatMessage> saveMessage(ChatMessage message) {  
+        return chatMessageRepository.save(message);  
+    }  
+  
+    public Flux<ChatMessage> getChatHistory() {  
+        return chatMessageRepository.findAll();  
+    }  
+}  
